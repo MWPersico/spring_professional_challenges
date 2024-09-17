@@ -1,6 +1,8 @@
 package com.devsuperior.rest_crud.dto;
 
 import com.devsuperior.rest_crud.entities.Client;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,9 +12,11 @@ public class ClientDTO implements Serializable {
     private static final long serialVersionUID = 1l;
 
     private final Long id;
+    @NotBlank(message="The field name cannot be blank")
     private final String name;
     private final String cpf;
     private final Double income;
+    @PastOrPresent(message="Birthdate cannot be in the future")
     private final LocalDate birthDate;
     private final Integer children;
 

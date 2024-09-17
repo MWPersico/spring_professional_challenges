@@ -3,6 +3,7 @@ package com.devsuperior.rest_crud.controllers;
 import com.devsuperior.rest_crud.dto.ClientDTO;
 import com.devsuperior.rest_crud.entities.Client;
 import com.devsuperior.rest_crud.services.ClientService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> insert(@Valid @RequestBody ClientDTO dto){
         ClientDTO created = service.insert(dto);
 
         URI uri = ServletUriComponentsBuilder
@@ -43,7 +44,7 @@ public class ClientController {
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @Valid @RequestBody ClientDTO dto){
         ClientDTO updated = service.update(id, dto);
         return ResponseEntity.ok(updated);
     }
